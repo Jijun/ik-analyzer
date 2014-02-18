@@ -7,16 +7,13 @@ ik-analyzer
 mvn compie
 mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKAnalzyerDemo
 </pre>
-h2. 安装使用:
+### 安装使用:
 <pre>
 mvn clean install
 </pre>
-add dependency to your  pom.xml
-<pre>
-	<dependency>
-		<groupId>org.wltea.ik-analyzer</groupId>
-		<artifactId>ik-analyzer</artifactId>
-		<version>5.1</version>
-	</dependency>
-</pre>
-
+### add dependency to your pom.xml
+<dependency>
+	<groupId>org.wltea.ik-analyzer</groupId>
+	<artifactId>ik-analyzer</artifactId>
+	<version>5.1</version>
+</dependency>
