@@ -3,6 +3,8 @@ ik-analyzer
 
 #  基于IK中文分词器,添加同义词功能
 
+IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为http://code.google.com/p/ik-analyzer/
+
 ### samples:
 
 <pre>
