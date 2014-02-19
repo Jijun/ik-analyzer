@@ -7,7 +7,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为h
 
 ### 示例:
 
-	mvn compie
+	mvn compile
 
 ####基本示例
 
