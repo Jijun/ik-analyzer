@@ -5,23 +5,27 @@ ik-analyzer
 
 IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为http://code.google.com/p/ik-analyzer/
 
-### samples:
+### 示例:
 
-<pre>
-mvn compie
-mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKAnalzyerDemo
-</pre>
+	mvn compie
+
+####基本示例
+
+	mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKAnalzyerDemo
+
+####同义词示例
+
+	mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKSynonymAnalzyerDemo
+
 
 ### 安装使用:
 
-<pre>
-mvn clean install
-</pre>
+	mvn clean install
 
 ### add dependency to your pom.xml
 
 	<dependency>
-	 <groupId>org.wltea.ik-analyzer</groupId>
-	<artifactId>ik-analyzer</artifactId>
-	<version>5.1</version>
+		<groupId>org.wltea.ik-analyzer</groupId>
+		<artifactId>ik-analyzer</artifactId>
+		<version>5.1</version>
 	</dependency>

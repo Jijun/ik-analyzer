@@ -34,18 +34,18 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.util.Version;
-import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.wltea.analyzer.lucene.IKSynonymAnalyzer;
 
 /**
  * 使用IKAnalyzer进行分词的演示
  * 2012-10-22
  *
  */
-public class IKAnalzyerDemo {
+public class IKSynonymAnalzyerDemo {
 	
 	public static void main(String[] args){
 		//构建IK分词器，使用smart分词模式
-		Analyzer analyzer = new IKAnalyzer(Version.LUCENE_46,false);
+		Analyzer analyzer = new IKSynonymAnalyzer(Version.LUCENE_46,false);
 		
 		//获取Lucene的TokenStream对象
 	    TokenStream ts = null;
