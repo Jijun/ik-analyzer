@@ -50,7 +50,7 @@ public class IKSynonymAnalzyerDemo {
 		//获取Lucene的TokenStream对象
 	    TokenStream ts = null;
 		try {
-			ts = analyzer.tokenStream("myfield", new StringReader("我来自中国nba,我的名字qq叫什么红色警戒， 中国百姓的日子好起来，作游戏暗黑破坏神"));
+			ts = analyzer.tokenStream("myfield", new StringReader("提莫是《英雄联盟》（简称LOL）中一个英雄角色"));
 			//获取词元位置属性
 		    OffsetAttribute  offset = ts.addAttribute(OffsetAttribute.class); 
 		    //获取词元文本属性

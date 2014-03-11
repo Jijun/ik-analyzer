@@ -38,6 +38,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
@@ -48,35 +49,33 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
+import org.wltea.analyzer.lucene.IKAnalyzer;
+import org.wltea.analyzer.lucene.IKPinyinAnalyzer;
 import org.wltea.analyzer.lucene.IKSynonymAnalyzer;
 
-
-
-
 /**
- * 使用IKAnalyzer进行Lucene索引和查询的演示
- * 2012-3-2
+ * 使用IKAnalyzer进行Lucene索引和查询的演示 2012-3-2
  * 
  * 以下是结合Lucene4.0 API的写法
- *
+ * 
  */
 public class LuceneIndexAndSearchDemo {
-	
-	
-	/**
-	 * 模拟：
-	 * 创建一个单条记录的索引，并对其进行搜索
-	 * @param args
-	 */
-	public static void main(String[] args){
+
+    /**
+     * 模拟： 创建一个单条记录的索引，并对其进行搜索
+     * 
+     * @param args
+     */
+    public static void main(String[] args){
 		//Lucene Document的域名
-		String fieldName = "text";
+		String fieldName = "title";
 		 //检索内容
-		String text = "我来自中国nba,我的名字qq叫什么红色警戒， 中国百姓的日子好起来，作游戏暗黑破坏神";
+		String text = "提莫是《英雄联盟》（简称）中一个英雄角色";
 		
 		//实例化IKAnalyzer分词器
-		Analyzer analyzer = new IKSynonymAnalyzer(Version.LUCENE_46,false);
-	    Analyzer analyzer2 = new IKSynonymAnalyzer(Version.LUCENE_46,true);
+//		Analyzer analyzer = new IKPinyinAnalyzer("","none",Version.LUCENE_46,true);
+        Analyzer analyzer =  new IKPinyinAnalyzer("","none", Version.LUCENE_46, false);
+        Analyzer analyzer2 = new IKAnalyzer(Version.LUCENE_46,true);
 
 		Directory directory = null;
 		IndexWriter iwriter = null;
@@ -85,8 +84,8 @@ public class LuceneIndexAndSearchDemo {
 		try {
 			//建立内存索引对象
 			directory = new RAMDirectory();	 
-			
-			//配置IndexWriterConfig
+//			
+//			//配置IndexWriterConfig
 			IndexWriterConfig iwConfig = new IndexWriterConfig(Version.LUCENE_40 , analyzer);
 			iwConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
 			iwriter = new IndexWriter(directory , iwConfig);
@@ -96,18 +95,20 @@ public class LuceneIndexAndSearchDemo {
 			doc.add(new TextField(fieldName, text, Field.Store.YES));
 			iwriter.addDocument(doc);
 			iwriter.commit();
-//			iwriter.close();
-			
+			iwriter.close();
+//		    directory = FSDirectory.open(new File("/tmp/index/VIDEO"));
 			//搜索过程**********************************
 		    //实例化搜索器   
 			ireader = DirectoryReader.open(directory);
 			isearcher = new IndexSearcher(ireader);			
 			
-			String keyword = "qq";			
+			String keyword = "英雄联盟";			
 			//使用QueryParser查询分析器构造Query对象
-			QueryParser qp = new QueryParser(Version.LUCENE_40, fieldName,  analyzer2);
+	        MultiFieldQueryParser multiParser = new MultiFieldQueryParser(Version.LUCENE_46, new String[]{"title"},analyzer);
+
+			QueryParser qp = new QueryParser(Version.LUCENE_46, "title",  analyzer);
 			qp.setDefaultOperator(QueryParser.AND_OPERATOR);
-			Query query = qp.parse(keyword);
+			Query query = multiParser.parse(keyword);
 			System.out.println("Query = " + query);
 			
 			//搜索相似度最高的5条记录
@@ -115,10 +116,10 @@ public class LuceneIndexAndSearchDemo {
 			System.out.println("命中：" + topDocs.totalHits);
 			//输出结果
 			ScoreDoc[] scoreDocs = topDocs.scoreDocs;
-			for (int i = 0; i < topDocs.totalHits; i++){
+			for (int i = 0; i < scoreDocs.length; i++){
 				Document targetDoc = isearcher.doc(scoreDocs[i].doc);
-				System.out.println(targetDoc.get("ID"));
-				System.out.println(targetDoc.getField("ID").stringValue());
+//				System.out.println(targetDoc.get("ID"));
+//				System.out.println(targetDoc.getField("ID").stringValue());
 				System.out.println("内容：" + targetDoc.toString());
 			}			
 			
