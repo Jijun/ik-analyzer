@@ -31,15 +31,15 @@ public class IKSynonymAnalyzer extends Analyzer {
 
     public IKSynonymAnalyzer(Version version, boolean useSmart) {
         this.luceneMatchVersion = version;
-        if (!version.onOrAfter(Version.LUCENE_40)) {
-            throw new IllegalArgumentException("This class only works with Lucene 4.0+.");
+        if (!version.onOrAfter(Version.LATEST)) {
+            throw new IllegalArgumentException("This class only works with Lucene 5.5+.");
         }
         this.useSmart = useSmart;
     }
 
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer token = new IKTokenizer(reader, useSmart);
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer token = new IKTokenizer(useSmart);
         Map<String, String> paramsMap = new HashMap<String, String>();
         Configuration cfg = DefaultConfig.getInstance();
 
