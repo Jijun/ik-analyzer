@@ -56,8 +56,7 @@ public final class IKTokenizer extends Tokenizer {
 	private int endPosition;
 	
 	/**
-	 * Lucene 4.0 Tokenizer适配器类构造函数
-	 * @param in
+	 * Lucene 5.x Tokenizer适配器类构造函数
 	 * @param useSmart
 	 */
 	public IKTokenizer( boolean useSmart){

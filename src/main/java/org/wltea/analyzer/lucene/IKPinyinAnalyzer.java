@@ -21,7 +21,7 @@ public final class IKPinyinAnalyzer extends Analyzer {
     
     public IKPinyinAnalyzer(String paddingChar, String firstLetter,Version version, boolean useSmart) {
         this.luceneMatchVersion = version;
-        if (!version.onOrAfter(Version.LUCENE_40)) {
+        if (!version.onOrAfter(Version.LATEST)) {
             throw new IllegalArgumentException("This class only works with Lucene 4.0+.");
         }
         this.useSmart = useSmart;
@@ -29,9 +29,9 @@ public final class IKPinyinAnalyzer extends Analyzer {
         this.padding_char = paddingChar;
     }
 
-    @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer token = new IKTokenizer(reader, useSmart);
+
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer token = new IKTokenizer( useSmart);
         Map<String, String> args = new HashMap<String, String>();
         args.put("luceneMatchVersion", luceneMatchVersion.toString());
         PinyinFilterFactory factory = new PinyinFilterFactory(args, padding_char, first_letter);

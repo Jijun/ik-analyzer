@@ -74,8 +74,8 @@ public class LuceneIndexAndSearchDemo {
 		
 		//实例化IKAnalyzer分词器
 //		Analyzer analyzer = new IKPinyinAnalyzer("","none",Version.LUCENE_46,true);
-        Analyzer analyzer =  new IKPinyinAnalyzer("","none", Version.LUCENE_46, false);
-        Analyzer analyzer2 = new IKAnalyzer(Version.LUCENE_46,true);
+        Analyzer analyzer =  new IKPinyinAnalyzer("","none", Version.LATEST, false);
+        Analyzer analyzer2 = new IKAnalyzer(Version.LATEST,true);
 
 		Directory directory = null;
 		IndexWriter iwriter = null;
@@ -86,7 +86,7 @@ public class LuceneIndexAndSearchDemo {
 			directory = new RAMDirectory();	 
 //			
 //			//配置IndexWriterConfig
-			IndexWriterConfig iwConfig = new IndexWriterConfig(Version.LUCENE_40 , analyzer);
+			IndexWriterConfig iwConfig = new IndexWriterConfig( analyzer);
 			iwConfig.setOpenMode(OpenMode.CREATE_OR_APPEND);
 			iwriter = new IndexWriter(directory , iwConfig);
 			//写入索引
@@ -104,9 +104,9 @@ public class LuceneIndexAndSearchDemo {
 			
 			String keyword = "英雄联盟";			
 			//使用QueryParser查询分析器构造Query对象
-	        MultiFieldQueryParser multiParser = new MultiFieldQueryParser(Version.LUCENE_46, new String[]{"title"},analyzer);
+	        MultiFieldQueryParser multiParser = new MultiFieldQueryParser( new String[]{"title"},analyzer);
 
-			QueryParser qp = new QueryParser(Version.LUCENE_46, "title",  analyzer);
+			QueryParser qp = new QueryParser("title",  analyzer);
 			qp.setDefaultOperator(QueryParser.AND_OPERATOR);
 			Query query = multiParser.parse(keyword);
 			System.out.println("Query = " + query);
