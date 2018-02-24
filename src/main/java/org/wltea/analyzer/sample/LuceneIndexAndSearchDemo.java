@@ -74,8 +74,8 @@ public class LuceneIndexAndSearchDemo {
 		
 		//实例化IKAnalyzer分词器
 //		Analyzer analyzer = new IKPinyinAnalyzer("","none",Version.LUCENE_46,true);
-        Analyzer analyzer =  new IKPinyinAnalyzer("","none", Version.LATEST, false);
-        Analyzer analyzer2 = new IKAnalyzer(Version.LATEST,true);
+        Analyzer analyzer =  new IKPinyinAnalyzer("","none",  false);
+        Analyzer analyzer2 = new IKAnalyzer(true);
 
 		Directory directory = null;
 		IndexWriter iwriter = null;

@@ -1,7 +1,7 @@
 ik-analyzer
 ===========
 
-#  基于IK中文分词器,添加同义词功能
+#  基于IK中文分词器,添加同义词功能, 兼容lucene 5.x
 
 IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为http://code.google.com/p/ik-analyzer/
 
@@ -9,11 +9,11 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为h
 
 	mvn compile
 
-####基本示例
+#### 基本示例
 
 	mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKAnalzyerDemo
 
-####同义词示例
+#### 同义词示例
 
 	mvn exec:java -Dexec.mainClass=org.wltea.analyzer.sample.IKSynonymAnalzyerDemo
 

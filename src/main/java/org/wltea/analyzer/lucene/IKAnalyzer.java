@@ -64,18 +64,7 @@ public final class IKAnalyzer extends Analyzer{
 		super();
 		this.useSmart = useSmart;
 	}
-	/**
-	 * 
-	 * @param version
-	 * @param useSmart
-	 */
-    public IKAnalyzer(Version version , boolean useSmart){
-        if (!version.onOrAfter(Version.LATEST)) {
-            throw new IllegalArgumentException("This class only works with Lucene 4.0+.");
-        }
-        this.useSmart = useSmart;
-    }
-	
+
 	/**
 	 * 重载Analyzer接口，构造分词组件
 	 */

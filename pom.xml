@@ -10,7 +10,7 @@
 	<properties>
 		<lucene.version>5.5.1</lucene.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 	</properties>
 	<dependencies>
 		<dependency>

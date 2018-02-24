@@ -45,7 +45,7 @@ public class IKSynonymAnalzyerDemo {
 	
 	public static void main(String[] args){
 		//构建IK分词器，使用smart分词模式
-		Analyzer analyzer = new IKSynonymAnalyzer(Version.LATEST,false);
+		Analyzer analyzer = new IKSynonymAnalyzer();
 		
 		//获取Lucene的TokenStream对象
 	    TokenStream ts = null;

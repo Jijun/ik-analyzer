@@ -22,17 +22,14 @@ import org.wltea.analyzer.cfg.DefaultConfig;
 public class IKSynonymAnalyzer extends Analyzer {
 
     private final boolean useSmart;
-    private final Version luceneMatchVersion;
+    private final boolean ignoreCase;
 
-    public IKSynonymAnalyzer(Version version) {
-        this(version, false);
+    public IKSynonymAnalyzer() {
+        this( true,false);
     }
 
-    public IKSynonymAnalyzer(Version version, boolean useSmart) {
-        this.luceneMatchVersion = version;
-        if (!version.onOrAfter(Version.LATEST)) {
-            throw new IllegalArgumentException("This class only works with Lucene 5.5+.");
-        }
+    public IKSynonymAnalyzer(boolean ignoreCase, boolean useSmart) {
+        this.ignoreCase = ignoreCase;
         this.useSmart = useSmart;
     }
 
@@ -42,9 +39,8 @@ public class IKSynonymAnalyzer extends Analyzer {
         Map<String, String> paramsMap = new HashMap<String, String>();
         Configuration cfg = DefaultConfig.getInstance();
 
-        paramsMap.put("luceneMatchVersion", luceneMatchVersion.toString());
         paramsMap.put("synonyms", cfg.getExtSynonymDictionarys());
-        paramsMap.put("ignoreCase", "true");
+        paramsMap.put("ignoreCase", Boolean.toString(ignoreCase));
         SynonymFilterFactory factory = new SynonymFilterFactory(paramsMap);
         ResourceLoader loader = new ClasspathResourceLoader();
         try {
